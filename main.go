@@ -11,9 +11,9 @@ import (
 
 var (
 	conf        = configure.New()
-	verifyToken = conf.String("verify-token", "mad-skrilla", "The token used to verify facebook")
+	verifyToken = conf.String("verify-token", "", "The token used to verify facebook")
 	verify      = conf.Bool("should-verify", false, "Whether or not the app should verify itself")
-	pageToken   = conf.String("page-token", "not skrilla", "The token that is used to verify the page on facebook")
+	pageToken   = conf.String("page-token", "", "The token that is used to verify the page on facebook")
 	appSecret   = conf.String("app-secret", "", "The app secret from the facebook developer portal")
 	port        = conf.Int("port", 8080, "The port used to serve the messenger bot")
 )
