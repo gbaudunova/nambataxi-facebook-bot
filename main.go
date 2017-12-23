@@ -37,12 +37,41 @@ func main() {
 	client.HandleMessage(func(m messenger.Message, r *messenger.Response) {
 		fmt.Printf("%v (Sent, %v)\n", m.Text, m.Time.Format(time.UnixDate))
 
-		p, err := client.ProfileByID(m.Sender.ID)
-		if err != nil {
-			fmt.Println("Something went wrong!", err)
-		}
+		/*
+			p, err := client.ProfileByID(m.Sender.ID)
+			if err != nil {
+				fmt.Println("Something went wrong!", err)
+			}
+		*/
 
-		r.Text(fmt.Sprintf("Hello, %v!", p.FirstName))
+		/*
+			button := messenger.StructuredMessageButton{}
+			button.Title = "title"
+			button.FallbackURL = "fallback URL"
+			button.MessengerExtensions = false
+			button.Payload = "what is a payload?"
+			button.Type = "what type?"
+			button.URL = "http://whuut.com"
+			button.WebviewHeightRatio = "3"
+			button.WebviewShareButton = "share?"
+			buttons := []messenger.StructuredMessageButton{button}
+			r.ButtonTemplate("Hello", &buttons)
+		*/
+
+		reply := messenger.QuickReply{}
+		reply.Payload = "Payload"
+		reply.Title = "Title"
+		reply.ContentType = "text"
+		replies := []messenger.QuickReply{reply, reply, reply}
+		r.TextWithReplies("Replies", replies)
+
+		button := messenger.StructuredMessageButton{}
+		button.Type = "web_url"
+		button.URL = "http://nambataxi.kg"
+		button.Title = "Namba Taxi Website"
+		buttons := []messenger.StructuredMessageButton{button}
+		r.ButtonTemplate("Buttons", &buttons)
+
 	})
 
 	// Setup a handler to be triggered when a message is delivered
